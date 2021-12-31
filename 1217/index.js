@@ -1,42 +1,3 @@
-Array.prototype.myReduce = function (callback, initialValue) {
-    let total = initialValue;
-
-    for (let i = 0; i < this.length; ++i) {
-        if (total === undefined) {
-            total = this[i];
-        } else {
-            total = callback(total, this[i], i, this);
-        }
-    }
-
-    return total;
-};
-
-console.log("-------- Has an initialValue --------");
-
-const arr = [175, 50, 25];
-console.log(arr.myReduce((acc, cur) => {
-    console.log('rounds for myReduce');
-    return acc - cur;
-}, 10));
-
-console.log(arr.reduce((acc, cur) => {
-    console.log('round for reduce');
-    return acc - cur;
-}, 10));
-
-console.log("-------- No an initialValue! --------");
-
-console.log(arr.myReduce((acc, cur) => {
-    console.log('round for myReduce');
-    return acc - cur;
-}));
-
-console.log(arr.reduce((acc, cur) => {
-    console.log('round for reduce');
-    return acc - cur;
-}));
-
 /* 1. Write a JavaScript function that reverse a number. 
 Example x = 32243;
 Expected Output: 34223  */
@@ -50,7 +11,7 @@ const reverseNumber = num => {
 
     return res;
 }
-const num = -32243;
+const num = -32240;
 console.log("1. reverse a number: ", num, reverseNumber(num));
 
 /* 2. Write a JavaScript function that checks whether a passed string is palindrome or not? 
@@ -76,7 +37,7 @@ console.log("2. checks string is palindrome: ", str1, isPalindrome(str1), str2, 
 Example string: 'dog' 
 Expected Output: d, do, dog, o, og, g */
 const allCombinations = str => {
-    let res = [];
+    const res = [];
     if (str === undefined || str.length === 0) {
         return res;
     }
@@ -115,8 +76,8 @@ const titleCase = (str) => {
         return str;
     }
 
-    let res = [];
-    for (let word of str.split(" ")) {
+    const res = [];
+    for (const word of str.split(" ")) {
         res.push(word[0].toUpperCase() + word.slice(1));
     }
     return res.join(' ');
@@ -133,10 +94,10 @@ const longestWord = (str) => {
         return str;
     }
 
-    return str.split(" ").reduce((acc, curr) => acc = acc.length < curr.length ? curr : acc);
+    return str.split(" ").reduce((acc, curr) => acc.length < curr.length ? curr : acc);
 
     // let longest = "";
-    // for (let word of str.split(" ")) {
+    // for (const word of str.split(" ")) {
     //     if (word.length > longest.length) {
     //         longest = word;
     //     }
@@ -156,14 +117,15 @@ const countVowels = (str) => {
     if (str === undefined || str.length === 0) {
         return 0;
     }
-
-    const vowels = "aeiou";
+    const vowels = new Set(["a", "e", "i", "o", "u"]);
     let count = 0;
-    for (let ch of str) {
-        if (vowels.indexOf(ch.toLowerCase()) > -1) {
+
+    for (const ch of str) {
+        if (vowels.has(ch.toLowerCase())) {
             count++;
         }
     }
+
     return count;
 }
 
@@ -183,6 +145,13 @@ const isPrime = num => {
         }
     }
     return true;
+
+    // if (num < 3) return num > 1;
+    // if (num % 2 === 0) return false;
+    // for (let i = 3; i < num; i += 2) {
+    //     if (num % i === 0) return false;
+    // }
+    // return true;
 }
 
 console.log("8. check the number is prime or not: ", isPrime(91), isPrime(37));
@@ -197,13 +166,22 @@ console.log("9. returns the type:", getDataType(function(){}));
 
 /* 10. Write a JavaScript function which returns the n rows by n columns identity matrix. */
 const identityMatrix = (n) => {
-    let matrix = [];
+    const matrix = [];
     for (let i = 0; i < n; ++i) {
-        matrix[i] = [];
-        for (let j = 0; j < n; ++j) {
-            matrix[i][j] = i === j ? 1 : 0;
-        }
+        matrix[i] = new Array(n).fill(0);
     }
+    // let matrix = new Array(n).fill(0).map(_ => new Array(n).fill(0));
+    for (let i = 0; i < n; ++i) {
+        matrix[i][i] = 1;
+    }
+
+    // for (let i = 0; i < n; ++i) {
+    //     matrix[i] = [];
+    //     for (let j = 0; j < n; ++j) {
+    //         matrix[i][j] = i === j ? 1 : 0;
+    //     }
+    // }
+
     return matrix;
 }
 
@@ -270,7 +248,7 @@ console.log("12. says whether a number is perfect:", isPerfect(496), isPerfect(2
 
 /* 13. Write a JavaScript function to compute the factors of a positive integer.  */
 const computeFactors = (num) => {
-    let res = [];
+    const res = [];
     if (num < 1) {
         return res;
     }
@@ -336,18 +314,13 @@ const uniqueCharacters = (str) => {
         return str;
     }
 
-    let map = {};
-    for (let ch of str) {
-        if (isNaN(map[ch])) {
-            map[ch] = 1;
-        }
-    }
+    const map = {};
 
     let res = "";
-    for (let ch of str) {
-        if (map[ch] == 1) {
+    for (const ch of str) {
+        if (isNaN(map[ch])) {
             res += ch;
-            map[ch]--;
+            map[ch] = 1;
         }
     }
     return res;
@@ -357,12 +330,12 @@ console.log("16. extract unique characters from a string:", uniqueCharacters("th
 
 /* 17. Write a JavaScript function to get the number of occurrences of each letter in specified string. */
 const numberOfLetter = (str) => {
-    let map = {};
+    const map = {};
     if (str === undefined || str.length === 0) {
         return map;
     }
 
-    for (let ch of str) {
+    for (const ch of str) {
         map[ch] = isNaN(map[ch]) ? 1 : map[ch] + 1;
     }
     return map;
@@ -402,7 +375,7 @@ console.log("19. returns array elements larger than a number:", largerElements([
 Sample   character   list:
 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" */
 const generateId = len => {
-    let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let id = "";
     for (let i = 0; i < len; ++i) {
         id += chars[Math.floor(Math.random() * chars.length)];
@@ -417,10 +390,10 @@ combinations in an array.
 Sample array: [1, 2, 3] and subset length is 2 
 Expected output: [[2, 1], [3, 1], [3, 2]] */
 const allSubsets = (arr, len) => {
-    let res = [];
+    const res = [];
 
     for (let i = 0; i < Math.pow(2, arr.length); ++i) {
-        let subset = [];
+        const subset = [];
         let j = arr.length;
 
         while (i !== 0 && j-- > 0) {
@@ -435,6 +408,10 @@ const allSubsets = (arr, len) => {
     }
 
     return res;
+
+    // return arr.reduce((acc, curr) => [
+    //         ...acc, ...acc.map(ele => [...ele, curr])
+    //     ], [[]]).filter((ele) => ele.length === len);
 }
 
 console.log("21. get all possible subset with a fixed length combinations in an array:", allSubsets([1, 2, 3], 2));
@@ -469,12 +446,12 @@ const findUniqueCharacter = (str) => {
         return str;
     }
 
-    let map = {};
-    for (let ch of str) {
+    const map = {};
+    for (const ch of str) {
         map[ch] = isNaN(map[ch]) ? 1 : map[ch] + 1;
     }
 
-    for (let ch of str) {
+    for (const ch of str) {
         if (map[ch] === 1) {
             return ch;
         }
@@ -519,7 +496,7 @@ longest country name as output.
 Sample function: Longest_Country_Name(["Australia", "Germany", "United States of America"])
 Expected output: "United States of America" */
 const longestCountryName = (countries) => {
-    return countries.reduce((acc, curr) => acc = acc.length < curr.length ? curr : acc)
+    return countries.reduce((acc, curr) => acc.length < curr.length ? curr : acc)
 }
 
 console.log("25. returns the longest country name as output:", longestCountryName(["Australia", "Germany", "United States of America"]));
@@ -531,7 +508,7 @@ const longestSubstring = (str) => {
         return str;
     }
 
-    let map = {};
+    const map = {};
     let res = "";
     for (let l = 0, r = 0; l < str.length && r < str.length; ++l) {
         while (r < str.length && (isNaN(map[str[r]]) || map[str[r]] === 0)) {
