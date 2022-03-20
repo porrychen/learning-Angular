@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline">
+  <mat-label>Search for Books</mat-label>
+  <input #search matInput placeholder="search..." (input)="searchBooks(search.value)">
+  <mat-icon matPrefix>search</mat-icon>
+</mat-form-field>

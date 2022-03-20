@@ -1,0 +1,13 @@
+<mat-toolbar>
+  <span>My Application</span>
+
+  <mat-nav-list class="nav-list">
+    <a mat-list-item *ngFor="let tab of tabs" [routerLink]="[tab.path]" routerLinkActive="active">
+      {{ tab.name }}
+    </a>
+  </mat-nav-list>
+</mat-toolbar>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>

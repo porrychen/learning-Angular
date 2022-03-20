@@ -1,0 +1,13 @@
+<ul class="edit-wishlist">
+  <li>
+    <mat-icon class="wishlist" [title]="'My Reading Wishlist(' + (wishList$ | async)?.length + ')'">book</mat-icon>
+    <div><span class="topic">My Reading Wishlist</span>({{(wishList$ | async)?.length}})</div>
+  </li>
+  <li *ngFor="let wish of wishList$ | async; let i = index" [title]="wish.title">
+    <span class="index">{{i + 1}}</span>
+    <span class="title">{{wish.title}}</span>
+    <button class="delete" title="delete wish" (click)="delete(wish)">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </li>
+</ul>

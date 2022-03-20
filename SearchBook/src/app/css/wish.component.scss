@@ -1,0 +1,98 @@
+@import "variables";
+
+$edit-wishlist-height: 50px;
+
+.edit-wishlist {
+  list-style-type: none;
+  padding: 0;
+  position: sticky;
+  top: 0;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    letter-spacing: 2px;
+    height: $edit-wishlist-height;
+    line-height: $edit-wishlist-height;
+    font-size: 1rem;
+    padding: 0px 10px;
+
+    &:hover {
+      left: 0.1em;
+      background-color: #dee2e6;
+    }
+
+    .index {
+      display: none;
+    }
+
+    .title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .topic {
+      display: none;
+      @include minWidth(910px) {
+        display: contents;
+      }
+    }
+
+    .wishlist {
+      line-height: $edit-wishlist-height;
+    }
+
+    button.delete {
+      cursor: pointer;
+      height: $edit-wishlist-height;
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  li + li {
+    margin-top: 8px;
+  }
+
+  @include maxWidth(550px) {
+    width: 60px;
+
+    li {
+      height: $edit-wishlist-height / 2;
+      line-height: $edit-wishlist-height / 2;
+
+      &:hover {
+        left: 1em;
+        border-radius: 5px 0px 0px 5px;
+      }
+
+      .index {
+        display: inherit;
+      }
+
+      .wishlist {
+        line-height: $edit-wishlist-height / 2;
+      }
+
+      .title {
+        display: none;
+      }
+
+      button.delete {
+        height: $edit-wishlist-height / 2;
+      }
+    }
+  }
+}
+
+.show-wish-list {
+  .mat-list-item {
+    height: auto;
+  }
+
+  h2 {
+    margin: 0px;
+  }
+}

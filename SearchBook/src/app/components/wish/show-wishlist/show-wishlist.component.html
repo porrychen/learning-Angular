@@ -1,0 +1,5 @@
+<mat-list role="list" *ngFor="let wish of wishList$ | async" class="show-wish-list">
+  <mat-list-item role="listitem">
+    <h2>{{wish.title}}</h2>
+  </mat-list-item>
+</mat-list>

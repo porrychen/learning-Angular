@@ -1,0 +1,10 @@
+<mat-card class="book-information" (click)="addWish()">
+  <img mat-card-image matPrefix [src]="book.imageLinks.thumbnail">
+  <mat-card-content>
+    <mat-card-title>{{book.title}}</mat-card-title>
+    <br />
+    <p *ngIf="book.publisher"><span>Publisher: </span>{{book.publisher}}</p>
+    <p *ngIf="book.publishedDate"><span>Published Date: </span>{{book.publishedDate}}</p>
+    <p class="list-text" *ngIf="book.description"><span>Description: </span>{{book.description}}</p>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,12 @@
+/* ====== Global variables ====== */
+@mixin minWidth($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin maxWidth($width) {
+  @media (max-width: $width) {
+    @content;
+  }
+}

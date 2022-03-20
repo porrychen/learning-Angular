@@ -1,0 +1,61 @@
+@import "variables";
+
+.book-information {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 136px 1fr;
+  color: transparent;
+  border: none;
+  box-shadow: none;
+
+  .mat-card-image {
+    margin: -4px 16px 0px 0px;
+    width: 120px;
+  }
+
+  .mat-card-content {
+    color: black;
+
+    p {
+      margin-bottom: 1px;
+      font-size: medium;
+    }
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  .list-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include maxWidth(500px) {
+      white-space: nowrap;
+      width: 200px;
+    }
+  }
+
+  &:hover {
+    color: #dee2e6;
+    border: 2px solid;
+    box-shadow: 0px 0px 1px;
+
+    .mat-card-image {
+      margin-left: -2px;
+    }
+  }
+
+  @include maxWidth(550px) {
+    grid-template-columns: 60px 1fr;
+
+    .mat-card {
+      padding: 8px;
+    }
+
+    .mat-card-image {
+      margin: -2px 16px 0px 0px;
+      width: 52px;
+    }
+  }
+}
