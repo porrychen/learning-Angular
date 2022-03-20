@@ -1,2 +1,2 @@
 npm install
-npm run ng -- build
+npm run ng -- build --prod
