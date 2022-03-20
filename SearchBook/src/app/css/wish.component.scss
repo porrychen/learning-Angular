@@ -60,8 +60,8 @@ $edit-wishlist-height: 50px;
     width: 60px;
 
     li {
-      height: $edit-wishlist-height / 2;
-      line-height: $edit-wishlist-height / 2;
+      height: calc($edit-wishlist-height / 2);
+      line-height: calc($edit-wishlist-height / 2);
 
       &:hover {
         left: 1em;
@@ -73,7 +73,7 @@ $edit-wishlist-height: 50px;
       }
 
       .wishlist {
-        line-height: $edit-wishlist-height / 2;
+        line-height: calc($edit-wishlist-height / 2);
       }
 
       .title {
@@ -81,7 +81,7 @@ $edit-wishlist-height: 50px;
       }
 
       button.delete {
-        height: $edit-wishlist-height / 2;
+        height: calc($edit-wishlist-height / 2);
       }
     }
   }
